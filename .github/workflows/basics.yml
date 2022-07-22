@@ -4,9 +4,30 @@ on: push
 
 jobs:
 
-  warnings:
-    needs: compile
+  compile:
+    runs-on: ubuntu-latest
+    container: epitechcontent/epitest-docker
 
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v3.0.2
+        with:
+          fetch-depth: 0
+
+      - name: Size
+        run: du -skh --exclude=".git"
+
+      - name: make fclean
+        run: make fclean
+
+      - name: make clean
+        run: make clean
+
+      - name: make
+        run: make
+
+  check_warnings:
+    needs: compile
     runs-on: ubuntu-latest
 
     steps:
@@ -20,11 +41,10 @@ jobs:
         uses: github/super-linter@v4.9.4
         env:
           VALIDATE_ALL_CODEBASE: false
-          DEFAULT_BRANCH: master
+          DEFAULT_BRANCH: main
 
-  pushin_p:
+  pushing:
     needs: compile
-
     runs-on: ubuntu-latest
 
     steps:
