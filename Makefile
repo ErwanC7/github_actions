@@ -7,7 +7,7 @@
 
 NAME		=	server
 
-SRC			=	server.c
+SRC			=	main.c
 
 OBJ			=	$(SRC:.c=.o)
 

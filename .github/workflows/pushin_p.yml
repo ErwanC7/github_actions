@@ -4,7 +4,7 @@ on: push
 
 jobs:
 
-  check_warning:
+  warnings:
     needs: compile
 
     runs-on: ubuntu-latest
