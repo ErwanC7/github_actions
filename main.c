@@ -7,7 +7,7 @@
 
 #include <unistd.h>
 
-void Hello(int a){write(1, "I'm doing")}
+void Hello(int a){write(1, "I'm doing\n", 10);}
 
 int main(int ac, char const * const av[])
 {
