@@ -1,7 +1,0 @@
-name: what_time_is_it
-on: [push]
-jobs:
-  check-bats-version:
-    runs-on: ubuntu-latest
-    steps:
-      - run: date

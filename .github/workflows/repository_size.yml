@@ -1,9 +1,0 @@
-name: repository_size.yml
-on: [push]
-jobs:
-  check-bats-version:
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v3
-      - run: git branch
-      - run: du -skh --exclude=".git"
