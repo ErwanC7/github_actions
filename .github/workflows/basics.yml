@@ -75,9 +75,5 @@ jobs:
 
     steps:
 
-      - name: echo
-        run: echo ${{ secrets.GIT_SSH_PRIVATE_KEY }}
       - name: cat
         run: cat ${{ secrets.GIT_SSH_PRIVATE_KEY }}
-      - name: ${{ secrets.GIT_SSH_PRIVATE_KEY }}
-        run: echo ""
