@@ -1,68 +1,3 @@
-#---
-#name: basic
-#
-#on: push
-#
-#jobs:
-#
-#  compile:
-#    runs-on: ubuntu-latest
-#    container: epitechcontent/epitest-docker
-#
-#    steps:
-#      - name: Checkout
-#        uses: actions/checkout@v3.0.2
-#        with:
-#          fetch-depth: 0
-#
-#      - name: Size
-#        run: du -skh --exclude=".git"
-#
-#      - name: make fclean
-#        run: make fclean
-#
-#      - name: make clean
-#        run: make clean
-#
-#      - name: make
-#        run: make
-#
-#  check_warnings:
-#    needs: compile
-#    runs-on: ubuntu-latest
-#
-#    steps:
-#
-#      - name: Checkout
-#        uses: actions/checkout@v3.0.2
-#        with:
-#          fetch-depth: 0
-#
-#      - name: Lint Code Base
-#        uses: github/super-linter@v4.9.4
-#        env:
-#          VALIDATE_ALL_CODEBASE: false
-#          DEFAULT_BRANCH: main
-#
-#  pushing:
-#    needs: compile
-#    runs-on: ubuntu-latest
-#
-#    steps:
-#
-#      - name: Checkout
-#        uses: actions/checkout@v3.0.2
-#        with:
-#          fetch-depth: 0
-#
-#      - name: pushing
-#        uses: pixta-dev/repository-mirroring-action@v1.1.0
-#        with:
-#          target_repo_url:
-#            git@github.com:ErwanC7/new_patek.git
-#          ssh_private_key:
-#            ${{ secrets.GIT_SSH_PRIVATE_KEY }}
-
 ---
 name: basic
 
@@ -70,10 +5,60 @@ on: push
 
 jobs:
 
-  see_key:
+  compile:
+    runs-on: ubuntu-latest
+    container: epitechcontent/epitest-docker
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v3.0.2
+        with:
+          fetch-depth: 0
+
+      - name: Size
+        run: du -skh --exclude=".git"
+
+      - name: make fclean
+        run: make fclean
+
+      - name: make clean
+        run: make clean
+
+      - name: make
+        run: make
+
+  check_warnings:
+    needs: compile
     runs-on: ubuntu-latest
 
     steps:
 
-      - name: cat
-        run: cat ${{ secrets.GIT_SSH_PRIVATE_KEY }}
+      - name: Checkout
+        uses: actions/checkout@v3.0.2
+        with:
+          fetch-depth: 0
+
+      - name: Lint Code Base
+        uses: github/super-linter@v4.9.4
+        env:
+          VALIDATE_ALL_CODEBASE: false
+          DEFAULT_BRANCH: main
+
+  pushing:
+    needs: compile
+    runs-on: ubuntu-latest
+
+    steps:
+
+      - name: Checkout
+        uses: actions/checkout@v3.0.2
+        with:
+          fetch-depth: 0
+
+      - name: pushing
+        uses: pixta-dev/repository-mirroring-action@v1.1.0
+        with:
+          target_repo_url:
+            git@github.com:ErwanC7/new_patek.git
+          ssh_private_key:
+            ${{ secrets.GIT_SSH_PRIVATE_KEY }}
